@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -53,6 +55,7 @@ fun ScreenButtonTextAndTextField() {
 
     val textFieldData = remember { mutableStateOf("") }
     val getData = remember { mutableStateOf("") }
+    val outLinedTextFieldData = remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -72,6 +75,17 @@ fun ScreenButtonTextAndTextField() {
             })
 
         Button(onClick = { getData.value = textFieldData.value }) {
+            Text(text = "Get Data")
+
+        }
+        OutlinedTextField(
+            value = outLinedTextFieldData.value,
+            onValueChange = { outLinedTextFieldData.value = it },
+            label = {
+                Text(text = "Enter Data")
+            })
+
+        OutlinedButton(onClick = { getData.value = outLinedTextFieldData.value }) {
             Text(text = "Get Data")
 
         }
