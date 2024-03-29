@@ -22,6 +22,8 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -52,7 +54,8 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     //ScreenButtonTextAndTextField()
-                    ScreenFloatingActionButton()
+                    //ScreenFloatingActionButton()
+                    ScreenSwitchButton()
                 }
             }
         }
@@ -64,7 +67,38 @@ class MainActivity : ComponentActivity() {
 fun GreetingPreview() {
     JetpackComposeWidgetsTheme {
         //ScreenButtonTextAndTextField()
-        ScreenFloatingActionButton()
+        //ScreenFloatingActionButton()
+        ScreenSwitchButton()
+    }
+}
+
+@Composable
+fun ScreenSwitchButton() {
+
+    val switchState = remember { mutableStateOf(false) }
+
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Switch(
+            checked = switchState.value, onCheckedChange = {
+                switchState.value = it
+                Log.e("Switch", switchState.value.toString())
+            },
+            colors = SwitchDefaults.colors(
+                checkedThumbColor = Color.Blue,//True durumu yuvarlak kısım
+                checkedTrackColor = Color.Red,//True durumu çucuk kısmı
+                uncheckedThumbColor = Color.Black,//False durumu yuvarlak kısım
+                uncheckedTrackColor = Color.Green//False durumu çubuk kısmı
+            )
+        )
+        Button(onClick = {
+            Log.e("Switch End State", switchState.value.toString())
+        }) {
+            Text(text = "Show")
+        }
     }
 }
 
