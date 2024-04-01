@@ -9,11 +9,16 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -53,9 +58,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    //ScreenButtonTextAndTextField()
-                    //ScreenFloatingActionButton()
-                    ScreenSwitchButton()
+                    /*ScreenButtonTextAndTextField()
+                    ScreenFloatingActionButton()
+                    ScreenSwitchButton()*/
+                    ScreenCheckBox()
                 }
             }
         }
@@ -66,9 +72,46 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     JetpackComposeWidgetsTheme {
-        //ScreenButtonTextAndTextField()
-        //ScreenFloatingActionButton()
-        ScreenSwitchButton()
+        /*ScreenButtonTextAndTextField()
+        ScreenFloatingActionButton()
+        ScreenSwitchButton()*/
+        ScreenCheckBox()
+    }
+}
+
+@Composable
+fun ScreenCheckBox() {
+    val checkBoxState = remember { mutableStateOf(false) }
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Checkbox(
+                checked = checkBoxState.value,
+                onCheckedChange = {
+                    checkBoxState.value = it
+                    Log.e("Check Box", checkBoxState.value.toString())
+                },
+                colors = CheckboxDefaults.colors(
+                    checkedColor = Color.DarkGray //check edilmiş halin rengi
+                )
+            )
+            Text(text = "Jetpack Compose", modifier = Modifier.padding(start = 12.dp))
+        }
+        OutlinedButton(onClick = {
+            Log.e(
+                "Check Box end state",
+                checkBoxState.value.toString()
+            )
+        }) {
+            Text(text = "Show", color = Color.DarkGray)
+        }
     }
 }
 
@@ -97,7 +140,7 @@ fun ScreenSwitchButton() {
         Button(onClick = {
             Log.e("Switch End State", switchState.value.toString())
         }) {
-            Text(text = "Show")
+            Text(text = "Show", color = Color.DarkGray)
         }
     }
 }
