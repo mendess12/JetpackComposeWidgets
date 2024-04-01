@@ -27,6 +27,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
@@ -64,8 +65,9 @@ class MainActivity : ComponentActivity() {
                     /*ScreenButtonTextAndTextField()
                     ScreenFloatingActionButton()
                     ScreenSwitchButton()
-                    ScreenCheckBox()*/
-                    ScreenClickable()
+                    ScreenCheckBox()
+                    ScreenClickable()*/
+                    ScreenRadioButton()
                 }
             }
         }
@@ -79,8 +81,37 @@ fun GreetingPreview() {
         /*ScreenButtonTextAndTextField()
         ScreenFloatingActionButton()
         ScreenSwitchButton()
-        ScreenCheckBox()*/
-        ScreenClickable()
+        ScreenCheckBox()
+        ScreenClickable()*/
+        ScreenRadioButton()
+    }
+}
+
+@Composable
+fun ScreenRadioButton() {
+    val teamList = listOf("Liverpool", "M.City", "Arsenal", "Chelsea")
+    val selectedIndex = remember { mutableStateOf(0) }
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Column {
+            teamList.forEachIndexed() { index, team ->
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    RadioButton(
+                        selected = (team == teamList[selectedIndex.value]),
+                        onClick = {
+                            selectedIndex.value = index
+                            Log.e("Radio Button", team)
+                        })
+                    Text(text = team)
+                }
+            }
+        }
     }
 }
 
