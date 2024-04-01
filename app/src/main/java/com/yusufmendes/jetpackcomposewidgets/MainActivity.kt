@@ -7,12 +7,14 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
@@ -38,6 +40,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -60,8 +63,9 @@ class MainActivity : ComponentActivity() {
                 ) {
                     /*ScreenButtonTextAndTextField()
                     ScreenFloatingActionButton()
-                    ScreenSwitchButton()*/
-                    ScreenCheckBox()
+                    ScreenSwitchButton()
+                    ScreenCheckBox()*/
+                    ScreenClickable()
                 }
             }
         }
@@ -74,8 +78,36 @@ fun GreetingPreview() {
     JetpackComposeWidgetsTheme {
         /*ScreenButtonTextAndTextField()
         ScreenFloatingActionButton()
-        ScreenSwitchButton()*/
-        ScreenCheckBox()
+        ScreenSwitchButton()
+        ScreenCheckBox()*/
+        ScreenClickable()
+    }
+}
+
+@Composable
+fun ScreenClickable() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Row(modifier = Modifier
+            .size(120.dp)
+            .background(Color.DarkGray)
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onTap = {
+                        Log.e("Box", "Clicked")
+                    },
+                    onDoubleTap = {
+                        Log.e("Box", "Second Clicked")
+                    },
+                    onLongPress = {
+                        Log.e("Box", "Long Clicked")
+                    }
+                )
+            }
+        ) {}
     }
 }
 
