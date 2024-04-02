@@ -3,6 +3,9 @@ package com.yusufmendes.jetpackcomposewidgets
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
+import android.view.ViewGroup
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
@@ -53,6 +56,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
 import com.yusufmendes.jetpackcomposewidgets.ui.theme.JetpackComposeWidgetsTheme
 
 class MainActivity : ComponentActivity() {
@@ -71,8 +75,9 @@ class MainActivity : ComponentActivity() {
                     ScreenCheckBox()
                     ScreenClickable()
                     ScreenRadioButton()
-                    ScreenProgressIndicator()*/
-                    ScreenSlider()
+                    ScreenProgressIndicator()
+                    ScreenSlider()*/
+                    ScreenWebView()
                 }
             }
         }
@@ -89,9 +94,28 @@ fun GreetingPreview() {
         ScreenCheckBox()
         ScreenClickable()
         ScreenRadioButton()
-        ScreenProgressIndicator()*/
-        ScreenSlider()
+        ScreenProgressIndicator()
+        ScreenSlider()*/
+        ScreenWebView()
     }
+}
+
+@SuppressLint("SetJavaScriptEnabled")
+@Composable
+fun ScreenWebView() {
+    val url = "https://github.com/mendess12"
+    AndroidView(factory = {
+        WebView(it).apply {
+            layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+            webViewClient = WebViewClient()
+            loadUrl(url)
+        }
+    }, update = {
+        it.loadUrl(url)
+    })
 }
 
 @Composable
