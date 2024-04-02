@@ -21,6 +21,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -66,8 +67,9 @@ class MainActivity : ComponentActivity() {
                     ScreenFloatingActionButton()
                     ScreenSwitchButton()
                     ScreenCheckBox()
-                    ScreenClickable()*/
-                    ScreenRadioButton()
+                    ScreenClickable()
+                    ScreenRadioButton()*/
+                    ScreenProgressIndicator()
                 }
             }
         }
@@ -82,8 +84,40 @@ fun GreetingPreview() {
         ScreenFloatingActionButton()
         ScreenSwitchButton()
         ScreenCheckBox()
-        ScreenClickable()*/
-        ScreenRadioButton()
+        ScreenClickable()
+        ScreenRadioButton()*/
+        ScreenProgressIndicator()
+    }
+}
+
+@Composable
+fun ScreenProgressIndicator() {
+    val progressState = remember { mutableStateOf(false) }
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        if (progressState.value) {
+            CircularProgressIndicator(
+                color = Color.Green,
+                modifier = Modifier
+                    .padding(top = 64.dp)
+                    .background(Color.DarkGray)
+            )
+        }
+        Row(
+            modifier = Modifier.fillMaxSize(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            OutlinedButton(onClick = { progressState.value = true }) {
+                Text(text = "Start", color = Color.DarkGray)
+            }
+            OutlinedButton(onClick = { progressState.value = false }) {
+                Text(text = "Stop", color = Color.DarkGray)
+            }
+        }
     }
 }
 
