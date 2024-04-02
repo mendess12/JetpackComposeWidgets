@@ -11,3 +11,9 @@
 | Check Box          | Radio Button    | Progress Bar   |
 | ------------------------- | ------------------------- | ------------------------- |
 | ![check-box](https://github.com/mendess12/JetpackComposeWidgets/assets/76566952/fc20fd8f-a5e5-49b3-9e29-dbb46a525ee2) | ![radio-button](https://github.com/mendess12/JetpackComposeWidgets/assets/76566952/da5b6f77-fe46-4c37-bbfb-fb4109656d52) | ![progress](https://github.com/mendess12/JetpackComposeWidgets/assets/76566952/04f27c19-e2ce-490a-9a11-a289ddb45144) |
+
+### Slider - Web View - Image
+
+| Slider         | Web View   | Image    |
+| ------------------------- | ------------------------- | ------------------------- |
+| ![slider](https://github.com/mendess12/JetpackComposeWidgets/assets/76566952/5cbc213a-689d-4043-ab7f-ba4dfc915d99) |![webview](https://github.com/mendess12/JetpackComposeWidgets/assets/76566952/58f7bda0-9a52-4e8e-8ef2-e95ffbdd2eb5) | ![image](https://github.com/mendess12/JetpackComposeWidgets/assets/76566952/7ecc9edf-1432-476b-a9b8-55d425e53c6d) |
