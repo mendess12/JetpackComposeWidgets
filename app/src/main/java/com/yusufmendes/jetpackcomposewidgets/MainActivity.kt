@@ -30,6 +30,8 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
@@ -68,8 +70,9 @@ class MainActivity : ComponentActivity() {
                     ScreenSwitchButton()
                     ScreenCheckBox()
                     ScreenClickable()
-                    ScreenRadioButton()*/
-                    ScreenProgressIndicator()
+                    ScreenRadioButton()
+                    ScreenProgressIndicator()*/
+                    ScreenSlider()
                 }
             }
         }
@@ -85,8 +88,32 @@ fun GreetingPreview() {
         ScreenSwitchButton()
         ScreenCheckBox()
         ScreenClickable()
-        ScreenRadioButton()*/
-        ScreenProgressIndicator()
+        ScreenRadioButton()
+        ScreenProgressIndicator()*/
+        ScreenSlider()
+    }
+}
+
+@Composable
+fun ScreenSlider() {
+    val sliderState = remember { mutableStateOf(0f) }
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = "Result : ${sliderState.value.toInt()}")
+        Slider(
+            value = sliderState.value,
+            onValueChange = { sliderState.value = it },
+            valueRange = 0f..100f,
+            modifier = Modifier.padding(all = 24.dp),
+            colors = SliderDefaults.colors(
+                thumbColor = Color.Blue,//yuvarlağın rengi
+                activeTrackColor = Color.LightGray,//aktif çubuk rengi
+                inactiveTrackColor = Color.DarkGray//aktif olmayan çubu rengi
+            )
+        )
     }
 }
 
