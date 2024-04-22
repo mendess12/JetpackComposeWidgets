@@ -12,6 +12,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -86,8 +87,9 @@ class MainActivity : ComponentActivity() {
                     ScreenProgressIndicator()
                     ScreenSlider()
                     ScreenWebView()
-                    ScreenImage()*/
-                    ScreenDropDownMenu()
+                    ScreenImage()
+                    ScreenDropDownMenu()*/
+                    ScreenDynamicDropDownMenu()
                 }
             }
         }
@@ -107,8 +109,57 @@ fun GreetingPreview() {
         ScreenProgressIndicator()
         ScreenSlider()
         ScreenWebView()
-        ScreenImage()*/
-        ScreenDropDownMenu()
+        ScreenImage()
+        ScreenDropDownMenu()*/
+        ScreenDynamicDropDownMenu()
+    }
+}
+
+@Composable
+fun ScreenDynamicDropDownMenu() {
+    val languageList = listOf("Kotlin", "Java", "C", "Python", "Go")
+    val selectionIndex = remember { mutableStateOf(0) }
+    val dropDownMenuState = remember { mutableStateOf(false) }
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        //Box sayesinde DropdownMenu butona daha yakın görünür.
+        //Buton ve DropdownMenu için alan oluşturur.
+        Box {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .size(100.dp, 150.dp)
+                    .clickable(
+                        onClick = {
+                            dropDownMenuState.value = true
+                        })
+            ) {
+                Text(text = languageList[selectionIndex.value]) //seçilen index text içinde görme
+                Image(
+                    painter = painterResource(id = R.drawable.drop_down_icon),
+                    contentDescription = ""
+                )
+            }
+
+            DropdownMenu(
+                expanded = dropDownMenuState.value,
+                onDismissRequest = { dropDownMenuState.value = false }) {
+
+                languageList.forEachIndexed { index, language ->
+                    DropdownMenuItem(text = {
+                        Text(text = language)
+                    }, onClick = {
+                        Log.e("language menu", "Language : $language")
+                        dropDownMenuState.value = false
+                        selectionIndex.value = index
+                    })
+                }
+            }
+        }
     }
 }
 
