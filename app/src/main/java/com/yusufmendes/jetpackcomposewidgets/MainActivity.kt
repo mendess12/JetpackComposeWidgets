@@ -14,6 +14,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,6 +28,8 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -82,8 +85,9 @@ class MainActivity : ComponentActivity() {
                     ScreenRadioButton()
                     ScreenProgressIndicator()
                     ScreenSlider()
-                    ScreenWebView()*/
-                    ScreenImage()
+                    ScreenWebView()
+                    ScreenImage()*/
+                    ScreenDropDownMenu()
                 }
             }
         }
@@ -102,8 +106,45 @@ fun GreetingPreview() {
         ScreenRadioButton()
         ScreenProgressIndicator()
         ScreenSlider()
-        ScreenWebView()*/
-        ScreenImage()
+        ScreenWebView()
+        ScreenImage()*/
+        ScreenDropDownMenu()
+    }
+}
+
+@Composable
+fun ScreenDropDownMenu() {
+    val dropDownMenuState = remember { mutableStateOf(false) }
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        //Box sayesinde DropdownMenu butona daha yakın görünür.
+        //Buton ve DropdownMenu için alan oluşturur.
+        Box {
+            Button(onClick = { dropDownMenuState.value = true }) {
+                Text(text = "Show Menu")
+            }
+
+            DropdownMenu(
+                expanded = dropDownMenuState.value,
+                onDismissRequest = { dropDownMenuState.value = false }) {
+
+                DropdownMenuItem(text = {
+                    Text(text = "Delete")
+                }, onClick = {
+                    Log.e("delete menu", "Delete Clicked")
+                    dropDownMenuState.value = false
+                })
+                DropdownMenuItem(text = {
+                    Text(text = "Update")
+                }, onClick = {
+                    Log.e("update menu", "Update Clicked")
+                    dropDownMenuState.value = false
+                })
+            }
+        }
     }
 }
 
